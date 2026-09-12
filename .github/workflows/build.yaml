@@ -25,19 +25,22 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4
-    - name: Install Theos
-      uses: Randomblock1/theos-action@v1.4
-      with:
-        theos-dir: ${{ github.workspace }}/theos
-        theos-src: https://github.com/theos/theos
-        theos-sdks: https://github.com/theos/sdks
-        theos-sdks-branch: master
-        orion: false
-    - name: Run build script
-      run: chmod +x ./build.sh && ./build.sh '${{ github.event.inputs.flex_repo }}' '${{ github.event.inputs.flex_branch }}'
-- name: Upload artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: Tweak-deb
-    path: packages/*.deb
+      - uses: actions/checkout@v4
+
+      - name: Install Theos
+        uses: Randomblock1/theos-action@v1.4
+        with:
+          theos-dir: ${{ github.workspace }}/theos
+          theos-src: https://github.com/theos/theos
+          theos-sdks: https://github.com/theos/sdks
+          theos-sdks-branch: master
+          orion: false
+
+      - name: Run build script
+        run: chmod +x ./build.sh && ./build.sh '${{ github.event.inputs.flex_repo }}' '${{ github.event.inputs.flex_branch }}'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tweak-deb
+          path: packages/*.deb
