@@ -36,3 +36,8 @@ jobs:
         orion: false
     - name: Run build script
       run: chmod +x ./build.sh && ./build.sh '${{ github.event.inputs.flex_repo }}' '${{ github.event.inputs.flex_branch }}'
+- name: Upload artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: Tweak-deb
+    path: packages/*.deb
